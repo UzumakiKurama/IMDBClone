@@ -21,14 +21,16 @@ const DarkModeSwitch = () => {
                 width="32" 
                 height="32"
                 onClick={()=>setTheme("light")} 
-                src="./lightmode.svg"/>
+                src="./lightmode.svg"
+                alt="?" />
         ):(
             <Image 
                 className="cursor-pointer text-xl" 
                 width='32' 
                 height="32"
                 onClick={()=> setTheme("dark")} 
-                src="./darkmode.svg"/>
+                src="./darkmode.svg"
+                alt="?" />
 
         ))}
     </>
