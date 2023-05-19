@@ -15,7 +15,7 @@ export default async function Home({searchParams}) {
         {next : {revalidate: 10000}})
     .then(response => response.json())
     .then(response => response.results)
-    .catch(err => console.error(err));
+    .catch(err => console.error(err)); 
 
   return (
     <>
