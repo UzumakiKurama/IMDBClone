@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
 
 html::-webkit-scrollbar{
     display: none;
@@ -8,4 +9,24 @@ html::-webkit-scrollbar{
 
 html{
     scrollbar-width: none;
+    padding: 0;
+    margin: 0;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+.item{
+    transition: transform .3s ease-out;
+}
+
+.carousel-container:focus-within .item,
+.carousel-container:hover .item {
+  transform: translateX(-6%);
+}
+
+.item:focus ~ .item,
+.item:hover ~ .item {
+  transform: translateX(6%);
 }
