@@ -1,10 +1,23 @@
 "use client";
-
 import React, { useEffect,useState,useRef } from 'react';
 import Card from './Card';
 
-const MainContainer = ({results}) => {
+const Carousel = ({title,results}) => {
+  //For Trending Results :- Day and Week
+  const [cards, setCards] = useState([]);
+  const [trendType, setTrendType] = useState('day');
 
+  useEffect(()=>{
+    if(title === 'Trending'){
+      trendType === 'day' ? setCards(results.day) : setCards(results.week);
+    } else {
+      setCards(results);
+    }
+  },[trendType,cards]);
+
+  const trendBtnClickHandler = (trend) => setTrendType(trend);
+
+  //This logic explains the carousel effect. Sliding cards.
   const maxScrollWidth = useRef(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const carousel = useRef(null);
@@ -49,7 +62,7 @@ const MainContainer = ({results}) => {
   }, [])
 
   return (
-    <div className=' 2xlg:container 2xl:mx-auto 2xl:px-0 py-3 px-10 '>
+    <div className=' lg:container lg:mx-auto lg:px-0 first:pt-6 px-10 '>
       <div className='carousel mx-auto'>
         <div className='relative overflow-visible'>
             <div className='flex justify-between absolute top left w-full h-full'>
@@ -95,11 +108,19 @@ const MainContainer = ({results}) => {
                     <span className="sr-only">Next</span>
                 </button>
             </div>
-            <h1>
-                See Trending movies
+            <h1 className='xl:text-xl font-merriweather pb-4 absolute z-10'>
+                {title === "Trending" ? 
+                <div>
+                  <span>{title} &nbsp;</span> 
+                  <div className=' text-black text-lg inline bg-white p-2 rounded-3xl '
+                        style={{background:'linear-gradient(119deg, rgb(245,158,11) 40%, #FFFF 40%)'}}>
+                    <button onClick={() => trendBtnClickHandler('day')}>Today  &nbsp;</button>
+                    <button onClick={() => trendBtnClickHandler('week')}> This Week</button>
+                  </div>
+                </div>  : title } 
             </h1>
             <div ref={carousel} className="carousel-container relative flex items-center gap-1 overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0">                
-              {results.map(element=>(
+              {cards.map(element=>(
                   <Card key={element.id} result={element} />
               ))}
             </div>
@@ -109,4 +130,4 @@ const MainContainer = ({results}) => {
   )
 }
 
-export default MainContainer
+export default Carousel

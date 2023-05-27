@@ -1,25 +1,14 @@
-import MainContainer from '@/components/Main/MainContainer';
-const API_KEY = process.env.API_KEY;
+import HomeContainer from '@/components/HomeContainer/HomeContainer';
+import request from '@/utilities/callapi';
 
-export default async function Home({searchParams}) {
-  const genre = searchParams.genre || "fetchTrending";
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: `Bearer ${API_KEY}`
-    }
-  };
-  const results = await fetch(`https://api.themoviedb.org/3/movie/${genre === "fetchTopRated" ? 'top_rated' : 'popular' }?language=en-US&page=1`, 
-        options,
-        {next : {revalidate: 10000}})
-    .then(response => response.json())
-    .then(response => response.results)
-    .catch(err => console.error(err)); 
+export default async function Home(){
+
+  const popularityResults = await request('/movie/now_playing?language=en-US&page=1')
+  const bgImages = popularityResults.map(movie=>movie.backdrop_path);
 
   return (
-    <>
-      <MainContainer results={results}/>
-    </>
+    <div style={{height: '100vh'}} className='w-full mx-auto my-0 relative'>
+      <HomeContainer bgImages={bgImages}/>
+    </div>
   ) 
 }

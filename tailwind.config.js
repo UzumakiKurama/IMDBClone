@@ -13,7 +13,10 @@ module.exports = {
       },
       fontFamily:{
         'merriweather':['Merriweather', 'sans-serif']
-      }
+      },
+      aspectRatio: {
+        '4/3': '4 / 3',
+      },
     },
   },
   plugins: [],
