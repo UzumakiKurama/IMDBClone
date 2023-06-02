@@ -17,6 +17,9 @@ module.exports = {
       aspectRatio: {
         '4/3': '4 / 3',
       },
+      boxShadow: {
+        '3xl': '0 60px 60px -15px rgba(0, 0, 0, 1)',
+      }
     },
   },
   plugins: [],

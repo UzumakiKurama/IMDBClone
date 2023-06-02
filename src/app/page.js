@@ -3,7 +3,7 @@ import request from '@/utilities/callapi';
 
 export default async function Home(){
 
-  const popularityResults = await request('/movie/now_playing?language=en-US&page=1')
+  const popularityResults = await request('/movie/now_playing?language=en-US&page=1').then(res=>res.results);
   const bgImages = popularityResults.map(movie=>movie.backdrop_path);
 
   return (

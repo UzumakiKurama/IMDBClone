@@ -35,6 +35,7 @@ const Carousel = ({title,results}) => {
       setCurrentIndex((prevState) => prevState + 1);
     }
   };
+
   const isDisabled = (direction) => {
     if (direction === 'prev') {
       return currentIndex <= 0;
@@ -56,11 +57,9 @@ const Carousel = ({title,results}) => {
   }, [currentIndex]);
 
   useEffect(() => {
-    maxScrollWidth.current = carousel.current
-      ? carousel.current.scrollWidth - carousel.current.offsetWidth
-      : 0;
-  }, [])
-
+    maxScrollWidth.current = carousel.current ? carousel.current.scrollWidth - carousel.current.offsetWidth : 0;
+  }, [cards])
+ 
   return (
     <div className=' lg:container lg:mx-auto lg:px-0 first:pt-6 px-10 '>
       <div className='carousel mx-auto'>
@@ -119,11 +118,15 @@ const Carousel = ({title,results}) => {
                   </div>
                 </div>  : title } 
             </h1>
-            <div ref={carousel} className="carousel-container relative flex items-center gap-1 overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0">                
-              {cards.map(element=>(
-                  <Card key={element.id} result={element} />
-              ))}
-            </div>
+            {
+              cards.length !== 0 ?  
+              <div ref={carousel} className="carousel-container relative flex items-center gap-1 overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0">                
+                {cards.map(element=>(
+                    <Card key={element.id} result={element} />
+                ))}
+              </div> : null
+            }
+            
         </div>
     </div>
     </div>

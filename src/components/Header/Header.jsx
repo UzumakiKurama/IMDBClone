@@ -6,7 +6,7 @@ import DarkModeSwitch from './DarkModeSwitch';
 const Header = () => {
   return (
     <div className='w-full absolute z-10'>
-      <div className='flex justify-between text-xl mx-2 py-7 max-w-6xl sm:mx-auto items-center'>
+      <div className='flex justify-between text-xl mx-8 py-7 items-center'>
               <div className='flex'>
                 <MenuItem title="HOME" address='/' Icon='/home-icon.svg'/>
                 <MenuItem title="ABOUT" address='/about' Icon='/about-icon.svg'/>
