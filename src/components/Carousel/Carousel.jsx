@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect,useState,useRef } from 'react';
-import Card from './Card';
+import CarouselCard from './CarouselCard';
 
 const Carousel = ({title,results}) => {
   //For Trending Results :- Day and Week
@@ -122,7 +122,7 @@ const Carousel = ({title,results}) => {
               cards.length !== 0 ?  
               <div ref={carousel} className="carousel-container relative flex items-center gap-1 overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0">                
                 {cards.map(element=>(
-                    <Card key={element.id} result={element} />
+                    <CarouselCard key={element.id} result={element} />
                 ))}
               </div> : null
             }

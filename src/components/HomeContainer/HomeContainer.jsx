@@ -56,8 +56,8 @@ const HomeContainer = ({bgImages}) => {
             </div>
           ))}
         </div>
-        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-6xl font-merriweather text-center'>
-            <div className='font-bold text-center text-amber-500'>
+        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10  text-center'>
+            <div className='font-bold text-center text-amber-500 font-kronaone tracking-wider  sm:text-9xl text-4xl pb-10'>
               <TypewriterComponent onInit={(typewriter)=>{
                                           typewriter.typeString("Movies")
                                                     .pauseFor(2000)
@@ -69,7 +69,7 @@ const HomeContainer = ({bgImages}) => {
                                             loop: true
                                           }}/>
             </div>
-            Know all about your favourite Movies and TV Shows.
+            <p className='font-merriweather'>Know all about your favourite Movies and TV Shows.</p>
         </div>
         <div onClick={nextSlideHandler} className='absolute top-1/2 right-0 translate-x-0 -translate-y-1/2 text-7xl z-10 cursor-pointer hover:text-amber-500' > 〉 </div>
     </div>

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 
-const Card = ({result}) => {
+const CarouselCard = ({result}) => {
 
   return (
         <div key={result.id} className="item carousel-item text-center relative w-80 h-80 snap-start font-merriweather text-white">
@@ -14,11 +14,12 @@ const Card = ({result}) => {
                             {result.title}
                         </h2>
                         <p className='flex justify-center bg-black bg-opacity-75 p-1 m-4 rounded-sm'>
-                            <span className='text-base pr-2'> {result.vote_average}</span><img width={25} height={25} src='./like.png' className='inline p-1'/>
+                            <span className='text-base pr-2'> {result.vote_average}</span>
+                            <img width={25} height={25} src='./like.png' className='inline p-1'/>
                             {result.adult && <span>Adult</span> }
                         </p>
-                        <Link href={`/movie/${result.id}`} className='rounded-sm bg-blue-900 p-1 italic bg-opacity-70'>
-                            See More <img width={30} height={30} className='inline' src='./r-arrow.png'/>
+                        <Link href={`/movie/${result.id}`} className='rounded-[50%] bg-gray-950 p-1 italic bg-opacity-70'>
+                            <img width={30} height={30} className='inline' src='./r-arrow.png'/>
                         </Link> 
                     </div>
             </div>
@@ -27,4 +28,4 @@ const Card = ({result}) => {
   )
 }
 
-export default Card
+export default CarouselCard
