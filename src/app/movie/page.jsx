@@ -13,12 +13,13 @@ const Movie = async () => {
       day : dayTrendingResults,
       week : weekTrendingResults
     }
+    
   return (
     <div className='h-full w-screen relative mx-auto pt-20 '>
-        <Carousel title="Trending" results={trendResults} />
-        <Carousel title="Top Rated" results={topRatedResults} />
-        <Carousel title="Now Playing" results={nowPlayingResults}/>
-        <Carousel title="Upcoming" results={upcomingResults}/>
+        <Carousel title="Trending" results={trendResults} type="movie" />
+        <Carousel title="Top Rated" results={topRatedResults} type="movie" />
+        <Carousel title="Now Playing" results={nowPlayingResults} type="movie" />
+        <Carousel title="Upcoming" results={upcomingResults} type="movie" />
     </div>
   )
 }

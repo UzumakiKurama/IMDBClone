@@ -2,7 +2,7 @@
 import React, { useEffect,useState,useRef } from 'react';
 import CarouselCard from './CarouselCard';
 
-const Carousel = ({title,results}) => {
+const Carousel = ({title,results,type}) => {
   //For Trending Results :- Day and Week
   const [cards, setCards] = useState([]);
   const [trendType, setTrendType] = useState('day');
@@ -122,7 +122,7 @@ const Carousel = ({title,results}) => {
               cards.length !== 0 ?  
               <div ref={carousel} className="carousel-container relative flex items-center gap-1 overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0">                
                 {cards.map(element=>(
-                    <CarouselCard key={element.id} result={element} />
+                    <CarouselCard key={element.id} result={element} type={type} />
                 ))}
               </div> : null
             }

@@ -9,7 +9,7 @@ const options = {
 
 const request = async (url) => {
 
-  const result = await fetch(`https://api.themoviedb.org/3${url}`,options,{next : {revalidate: 5000}})
+  const result = await fetch(`https://api.themoviedb.org/3${url}`,options,{next : {revalidate: 1000}})
                 .then(response => response.json())
                 .catch(err => console.error(err));
   

@@ -1,45 +1,59 @@
 import request from '@/utilities/callapi'
 import React from 'react'
 import DetailsCard from './DetailsCard';
+import Image from 'next/image';
 
-const Details = async ({info}) => {
+const Details = async ({info,type}) => {
 
-    // For getting cast and crew of the movie/TV series
-    const creditResults = await request(`/movie/${info.id}/credits?language=en-US`);
+    let creditResults = {};
+    let recommendations = [];
+
+    if(type === "movie"){
+        creditResults = await request(`/movie/${info?.id}/credits?language=en-US`);
+        recommendations = await request(`/movie/${info.id}/recommendations?language=en-US&page=1`).then(res=>res.results);
+    } else {
+        creditResults = await request(`/tv/${info.id}/credits?language=en-US`);
+        recommendations = await request(`/tv/${info.id}/recommendations?language=en-US&page=1`).then(res=>res.results);
+    }
     
     const actors = [];
     let director = '';
     for(let i=0; i<8; i++){
-        actors.push(creditResults?.cast[i]);
+        if(creditResults?.cast?.length >0) actors.push(creditResults.cast[i]);
     }
 
-    for(let i=0; i<creditResults?.crew.length ; i++){
-        if(creditResults.crew[i].known_for_department === 'Directing'){
+    for(let i=0; i<creditResults?.crew?.length ; i++){
+        if( creditResults?.cast?.length >0 && creditResults.crew[i].known_for_department === 'Directing'){
             director = creditResults.crew[i].name;
             break;
         }
     }
 
-    // For getting collections 
+    // For getting collections (Prequels and Sequels)
     let collection = {};
     if(info.belongs_to_collection){
         collection = await request(`/collection/${info.belongs_to_collection.id}?language=en-US`);
     }
 
+    let recommendationCollection = [];
+    for(let i=0; i< Math.min(10,recommendations.length);i++){
+        recommendationCollection.push(recommendations[i]);
+    }
+    
     return (
     <div className='flex flex-col sm:mx-20 items-center content-center md:space-x-6'>
         
         <div style={{backgroundImage:`linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,0.9)), url(https://image.tmdb.org/t/p/original/${info.backdrop_path})`, height:'80vh'}} 
              className=' w-full bg-cover bg-no-repeat bg-center relative'>
             <div className='text-center absolute bottom-0 left-1/2 -translate-x-1/2'>
-                <h1 style={{fontFamily:'Krona One'}} className='text-white uppercase font-semibold sm:text-8xl text-4xl pb-10 px-3 tracking-wider font-kronaone leading-snug'>{info.title}</h1>
+                <h1 style={{fontFamily:'Krona One'}} className='text-white uppercase font-semibold sm:text-8xl text-4xl pb-10 px-3 tracking-wider font-kronaone leading-snug'>{ type==="movie" ? info.title : info.name}</h1>
                 <p className=' text-white pb-10 italic font-merriweather'>{info.tagline}</p>
             </div>
         </div>
 
         <div className='p-8 flex'>
             <div className='pr-10'>
-                <img src={`https://image.tmdb.org/t/p/w780/${info.poster_path}`} />
+                <Image src={`https://image.tmdb.org/t/p/w780/${info?.poster_path}`} width={780} height={900} alt="Loading" />
             </div>
 
             <div className='text-black dark:text-white font-merriweather'>
@@ -62,6 +76,10 @@ const Details = async ({info}) => {
                     <p> 
                         Directed By : {director}
                     </p>
+
+                    {
+                        type === "tvShow" && <p> Created By : {info.created_by[0]?.name}</p>
+                    }
                 </div>
 
                 <div className='text-lg leading-relaxed text-justify pb-10'>
@@ -75,10 +93,10 @@ const Details = async ({info}) => {
                         {
                             actors.map(actor =>(
                                 <div className='grow-1 p-5 '>
-                                        <img className='mx-auto rounded-[50%]' src={`https://image.tmdb.org/t/p/w154/${actor.profile_path}`} />
-                                        <p className='text-center'> {actor.name} </p>
+                                        <img className='mx-auto rounded-[50%]' src={`https://image.tmdb.org/t/p/w154/${actor?.profile_path}`} />
+                                        <p className='text-center'> {actor?.name} </p>
                                         <p className='text-center italic'>As</p>
-                                        <p className='text-center italic'> {actor.character} </p>
+                                        <p className='text-center italic'> {actor?.character} </p>
                                 </div>
                                 ))
                         }
@@ -101,6 +119,24 @@ const Details = async ({info}) => {
                 </div>
                     : null
             }
+
+            {/* {
+                info.seasons && 
+                <div className='flex flex-wrap justify-between'>
+                    {info.seasons.map(season => <Image src={`https://image.tmdb.org/t/p/w300/${season?.poster_path}`} alt='loading' width={200} height={300} />)}
+                </div>
+            } */}
+
+            <div className='w-full pb-2'>
+                <h2 className='border-l-4 border-amber-500 p-2 text-3xl font-semibold'>Simliar {type==="movie" ? "movie":"shows"} </h2>
+                <div className='flex flex-wrap pl-8'>
+                    {
+                        recommendationCollection.map(item=>(
+                            <DetailsCard details={item} type={type === "movie" ? "movie":"tvShow"} />
+                        )) 
+                    }
+                </div>
+            </div>
     </div>
   )
 }

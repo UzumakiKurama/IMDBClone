@@ -5,8 +5,8 @@ import React from 'react'
 const MoviePage = async ({params}) => {
   const movie = await request(`/movie/${params.id}?language=en-US`);
   return ( 
-    <div className='w-full pt-[88px] '>
-        <Details info={movie} />
+    <div className='w-full pt-[88px]'>
+        <Details info={movie} type="movie"/>
     </div>
   )
 }
