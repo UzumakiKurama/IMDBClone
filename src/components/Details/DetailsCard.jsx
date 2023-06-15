@@ -3,9 +3,9 @@ import React from 'react'
 
 const DetailsCard = ({details,type}) => {
   return (
-    <div className='group bg-no-repeat m-4 relative font-merriweather'>
+    <div className='group bg-no-repeat m-2 sm:m-4 relative font-merriweather'>
         <img className='rounded-md relative bg-gray-400 background-clip group-hover:background-clip-hover' 
-             src={`https://image.tmdb.org/t/p/w185/${details.poster_path}`} loading='lazy'/>
+             src={`https://image.tmdb.org/t/p/w185/${details.poster_path}`} alt="" loading='lazy'/>
         <div className='absolute bottom-3 left-0 opacity-0 translate-y-10 group-hover:translate-y-0 group-hover:opacity-100 transition-all'>
             <img className='w-8 h-8' src='/star.png' loading='lazy' />
             <h3> <span className='font-bold' > {details.vote_average.toFixed(1)} </span> /10 </h3>

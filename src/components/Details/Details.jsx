@@ -10,10 +10,10 @@ const Details = async ({info,type}) => {
 
     if(type === "movie"){
         creditResults = await request(`/movie/${info?.id}/credits?language=en-US`);
-        recommendations = await request(`/movie/${info.id}/recommendations?language=en-US&page=1`).then(res=>res.results);
+        recommendations = await request(`/movie/${info?.id}/recommendations?language=en-US&page=1`).then(res=>res?.results);
     } else {
-        creditResults = await request(`/tv/${info.id}/credits?language=en-US`);
-        recommendations = await request(`/tv/${info.id}/recommendations?language=en-US&page=1`).then(res=>res.results);
+        creditResults = await request(`/tv/${info?.id}/credits?language=en-US`);
+        recommendations = await request(`/tv/${info?.id}/recommendations?language=en-US&page=1`).then(res=>res?.results);
     }
     
     const actors = [];
@@ -31,12 +31,12 @@ const Details = async ({info,type}) => {
 
     // For getting collections (Prequels and Sequels)
     let collection = {};
-    if(info.belongs_to_collection){
+    if(info?.belongs_to_collection){
         collection = await request(`/collection/${info.belongs_to_collection.id}?language=en-US`);
     }
 
     let recommendationCollection = [];
-    for(let i=0; i< Math.min(10,recommendations.length);i++){
+    for(let i=0; i< Math.min(10,recommendations?.length);i++){
         recommendationCollection.push(recommendations[i]);
     }
     
@@ -52,8 +52,8 @@ const Details = async ({info,type}) => {
         </div>
 
         <div className='p-8 flex'>
-            <div className='pr-10'>
-                <Image src={`https://image.tmdb.org/t/p/w780/${info?.poster_path}`} width={780} height={900} alt="Loading" />
+            <div className='pr-10 hidden sm:block'>
+                <Image src={`https://image.tmdb.org/t/p/w780/${info?.poster_path}`} width={780} height={900} alt="" />
             </div>
 
             <div className='text-black dark:text-white font-merriweather'>
@@ -63,14 +63,14 @@ const Details = async ({info,type}) => {
                     <p className='flex items-center'> 
                         Rating : 
                         <img className=' w-16 h-12 px-2' src='/star.png'/>
-                        <span className='font-semibold '>{info.vote_average.toFixed(2)} </span> 
+                        <span className='font-semibold '>{info?.vote_average?.toFixed(2)} </span> 
                         <span className='text-gray-400'> / 10</span> 
                     </p>
-                    <p> Genre : {info.genres.map(genre => (
+                    <p> Genre : {info?.genres.map(genre => (
                         <span className='pr-2 bg-amber-500 hover:bg-amber-400 rounded-3xl p-2 m-2 text-black'>{genre.name}</span>
                         ))} </p>
                     <p>
-                        Released : <span>{info.release_date || info.first_air_date}</span> 
+                        Released : <span>{info?.release_date || info?.first_air_date}</span> 
                     </p>
 
                     <p> 
@@ -91,11 +91,11 @@ const Details = async ({info,type}) => {
                     
                     <div className='flex flex-wrap'>
                         {
-                            actors.map(actor =>(
-                                <div className='grow-1 p-5 '>
-                                        <img className='mx-auto rounded-[50%]' src={`https://image.tmdb.org/t/p/w154/${actor?.profile_path}`} />
+                            actors?.map(actor =>(
+                                <div className='grow-1 p-2 sm:p-5'>
+                                        <img className='mx-auto rounded-[50%]' alt="" src={`https://image.tmdb.org/t/p/w154/${actor?.profile_path}`} />
                                         <p className='text-center'> {actor?.name} </p>
-                                        <p className='text-center italic'>As</p>
+                                        <p className='text-center italic'>{actor != undefined ? 'As' : null }</p>
                                         <p className='text-center italic'> {actor?.character} </p>
                                 </div>
                                 ))
@@ -106,12 +106,12 @@ const Details = async ({info,type}) => {
         </div>
             {
                 Object.keys(collection).length !== 0 ? 
-                <div className='w-full pb-20'>
+                <div className='w-full py-20'>
                     <h2 className='border-l-4 border-amber-500 p-2 text-3xl font-semibold'> Prequels / Sequels </h2>
                     <br/>
-                    <div className='flex flex-wrap pl-8'>
+                    <div className='flex flex-wrap sm:pl-8'>
                         {
-                            collection.parts.map(part=>(
+                            collection?.parts?.map(part=>(
                                 <DetailsCard details={part} />
                             ))
                         }
@@ -127,11 +127,11 @@ const Details = async ({info,type}) => {
                 </div>
             } */}
 
-            <div className='w-full pb-2'>
-                <h2 className='border-l-4 border-amber-500 p-2 text-3xl font-semibold'>Simliar {type==="movie" ? "movie":"shows"} </h2>
-                <div className='flex flex-wrap pl-8'>
+            <div className='w-full py-5'>
+                <h2 className='border-l-4 border-amber-500 m-1 p-2 text-3xl font-semibold'>Simliar {type==="movie" ? "movie":"shows"} </h2>
+                <div className='flex flex-wrap sm:pl-8 pt-6'>
                     {
-                        recommendationCollection.map(item=>(
+                        recommendationCollection?.map(item=>(
                             <DetailsCard details={item} type={type === "movie" ? "movie":"tvShow"} />
                         )) 
                     }

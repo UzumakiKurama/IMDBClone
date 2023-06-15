@@ -2,6 +2,7 @@ import React from 'react';
 import MenuItem from './MenuItem';
 import Link from 'next/link';
 import DarkModeSwitch from './DarkModeSwitch';
+import SearchBox from '../SearchBox/SearchBox';
 
 const Header = () => {
   return (
@@ -13,6 +14,7 @@ const Header = () => {
                 <MenuItem title="MOVIES" address='/movie' Icon='/movie.svg'/>
                 <MenuItem title="TV SHOWS" address='/tv-shows' Icon='/tv-shows-light.svg'/>
               </div>
+              <SearchBox />
               <div className='flex items-center space-x-5'>
                 <DarkModeSwitch/>
                 <Link href='/'>
