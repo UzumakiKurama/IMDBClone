@@ -15,7 +15,7 @@ const Movie = async () => {
     }
     
   return (
-    <div className='h-full w-screen relative mx-auto pt-20 '>
+    <div className='h-full w-screen relative mx-auto pt-36 sm:pt-20 '>
         <Carousel title="Trending" results={trendResults} type="movie" />
         <Carousel title="Top Rated" results={topRatedResults} type="movie" />
         <Carousel title="Now Playing" results={nowPlayingResults} type="movie" />

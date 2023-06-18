@@ -1,7 +1,7 @@
 'use client';
 import React, { useCallback, useEffect, useRef, useState, useLayoutEffect } from 'react'
 import TypewriterComponent from 'typewriter-effect';
-const HomeContainer = ({bgImages}) => {
+const HomeContainer = ({bgImages, bgImagesMobile}) => {
   
   const [currentIndex, setCurrentIndex] = useState(0);
   const [width, setWidth] = useState(null);
@@ -47,14 +47,22 @@ const HomeContainer = ({bgImages}) => {
   }, [widthRef]);
 
   return (
-    <div ref={widthRef} className='h-full relative overflow-hidden'>
-        <div onClick={prevSlideHandler} className='absolute top-1/2 left-0 translate-x-0 -translate-y-1/2 text-7xl z-10 cursor-pointer hover:text-amber-500'>〈 </div>
-        <div style={{width:`${width*bgImages.length}px`, transform:`translateX(-${currentIndex*width}px)`, transition: 'transform ease-out 0.5s'}} className='h-full flex opacity-30 overflow-hidden'>
-          {bgImages.map((imageUrl,id) => (
-            <div key={id} style={{backgroundImage : `url(https://image.tmdb.org/t/p/original/${imageUrl})`}} 
-                 className='h-full w-full bg-center bg-cover bg-no-repeat object-fill transition-all'> 
-            </div>
-          ))}
+    <div ref={widthRef} className='h-full relative overflow-hidden '>
+        <div onClick={prevSlideHandler} className='absolute top-1/2 left-0 translate-x-0 -translate-y-1/2 text-7xl z-10 cursor-pointer text-white hover:text-amber-500'>〈 </div>
+        <div style={{width:`${width*bgImages.length}px`, transform:`translateX(-${currentIndex*width}px)`, transition: 'transform ease-out 0.5s'}} className='h-full flex overflow-hidden'>
+          {
+            width > 480 ? 
+            bgImages.map((imageUrl,id) => (
+              <div key={id} style={{backgroundImage : `linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,0.7)),url(https://image.tmdb.org/t/p/original/${imageUrl})`}} 
+                   className='h-full w-full bg-center bg-cover bg-no-repeat object-fill transition-all '> 
+              </div>
+            )) : 
+            bgImagesMobile.map((imageUrl,id) => (
+              <div key={id} style={{backgroundImage : `linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,0.7)),url(https://image.tmdb.org/t/p/original/${imageUrl})`}} 
+                   className='h-full w-full bg-center bg-cover bg-no-repeat object-fill transition-all '> 
+              </div>
+            ))
+          }
         </div>
         <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10  text-center'>
             <div className='font-bold text-center text-amber-500 font-kronaone tracking-wider  sm:text-9xl text-4xl pb-10'>
@@ -69,9 +77,9 @@ const HomeContainer = ({bgImages}) => {
                                             loop: true
                                           }}/>
             </div>
-            <p className='font-merriweather'>Know all about your favourite Movies and TV Shows.</p>
+            <p className='font-merriweather text-lg sm:text-2xl text-white'>Know all about your favourite Movies and TV Shows.</p>
         </div>
-        <div onClick={nextSlideHandler} className='absolute top-1/2 right-0 translate-x-0 -translate-y-1/2 text-7xl z-10 cursor-pointer hover:text-amber-500' > 〉 </div>
+        <div onClick={nextSlideHandler} className='absolute top-1/2 right-0 translate-x-0 -translate-y-1/2 text-7xl z-10 cursor-pointer text-white hover:text-amber-500' > 〉 </div>
     </div>
   )
 }

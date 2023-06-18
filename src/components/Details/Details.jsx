@@ -43,7 +43,7 @@ const Details = async ({info,type}) => {
     return (
     <div className='flex flex-col sm:mx-20 items-center content-center md:space-x-6'>
         
-        <div style={{backgroundImage:`linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,0.9)), url(https://image.tmdb.org/t/p/original/${info.backdrop_path})`, height:'80vh'}} 
+        <div style={{backgroundImage:`linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,0.9)), url(https://image.tmdb.org/t/p/original/${info?.backdrop_path})`, height:'80vh'}} 
              className=' w-full bg-cover bg-no-repeat bg-center relative'>
             <div className='text-center absolute bottom-0 left-1/2 -translate-x-1/2'>
                 <h1 style={{fontFamily:'Krona One'}} className='text-white uppercase font-semibold sm:text-8xl text-4xl pb-10 px-3 tracking-wider font-kronaone leading-snug'>{ type==="movie" ? info.title : info.name}</h1>
@@ -51,7 +51,7 @@ const Details = async ({info,type}) => {
             </div>
         </div>
 
-        <div className='p-8 flex'>
+        <div className='p-2 sm:p-8 flex'>
             <div className='pr-10 hidden sm:block'>
                 <Image src={`https://image.tmdb.org/t/p/w780/${info?.poster_path}`} width={780} height={900} alt="" />
             </div>
@@ -66,7 +66,8 @@ const Details = async ({info,type}) => {
                         <span className='font-semibold '>{info?.vote_average?.toFixed(2)} </span> 
                         <span className='text-gray-400'> / 10</span> 
                     </p>
-                    <p> Genre : {info?.genres.map(genre => (
+                    <p className='flex flex-wrap items-center sm:block '> Genre : 
+                        {info?.genres?.map(genre => (
                         <span className='pr-2 bg-amber-500 hover:bg-amber-400 rounded-3xl p-2 m-2 text-black'>{genre.name}</span>
                         ))} </p>
                     <p>
@@ -112,7 +113,7 @@ const Details = async ({info,type}) => {
                     <div className='flex flex-wrap sm:pl-8'>
                         {
                             collection?.parts?.map(part=>(
-                                <DetailsCard details={part} />
+                                <DetailsCard details={part} type={type}/>
                             ))
                         }
                     </div>
