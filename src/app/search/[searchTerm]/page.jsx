@@ -15,8 +15,8 @@ const SearchPage = async ({params}) => {
         <div className='flex flex-wrap px-8 justify-center h-full'>
           {
             searchResults.length === 0 ? <p>No movies related to {params.searchTerm}</p> 
-            : searchResults?.map(item => (
-              <DetailsCard details={item} type="movie" />
+            : searchResults?.map((item,id) => (
+              <DetailsCard details={item} type="movie" key={id} />
             )) 
           }
         
@@ -27,8 +27,8 @@ const SearchPage = async ({params}) => {
         <div className='flex flex-wrap px-8 justify-center h-full'>
           {
             tvSearchResults?.length === 0 ? <p className='text-black dark:text-white'>No shows related to {params.searchTerm}</p> 
-              : tvSearchResults?.map(item=>(
-                <DetailsCard details={item} type="tvshow" />
+              : tvSearchResults?.map((item,id)=>(
+                <DetailsCard details={item} type="tvshow" key={id} />
               ))
           }
         </div>

@@ -1,7 +1,7 @@
 "use client";
 import React,{useEffect} from 'react'
 
-const error = ({error,reset}) => {
+const Error = ({error,reset}) => {
 
     useEffect(()=>{
       
@@ -15,4 +15,4 @@ const error = ({error,reset}) => {
   )
 }
 
-export default error
+export default Error

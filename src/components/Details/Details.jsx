@@ -67,8 +67,8 @@ const Details = async ({info,type}) => {
                         <span className='text-gray-400'> / 10</span> 
                     </p>
                     <p className='flex flex-wrap items-center sm:block '> Genre : 
-                        {info?.genres?.map(genre => (
-                        <span className='pr-2 bg-amber-500 hover:bg-amber-400 rounded-3xl p-2 m-2 text-black'>{genre.name}</span>
+                        {info?.genres?.map((genre,id) => (
+                        <span key={id} className='pr-2 bg-amber-500 hover:bg-amber-400 rounded-3xl p-2 m-2 text-black'>{genre.name}</span>
                         ))} </p>
                     <p>
                         Released : <span>{info?.release_date || info?.first_air_date}</span> 
@@ -92,8 +92,8 @@ const Details = async ({info,type}) => {
                     
                     <div className='flex flex-wrap'>
                         {
-                            actors?.map(actor =>(
-                                <div className='grow-1 p-2 sm:p-5'>
+                            actors?.map((actor,id) =>(
+                                <div className='grow-1 p-2 sm:p-5' key={id}>
                                         <img className='mx-auto rounded-[50%]' alt="" src={`https://image.tmdb.org/t/p/w154/${actor?.profile_path}`} />
                                         <p className='text-center'> {actor?.name} </p>
                                         <p className='text-center italic'>{actor != undefined ? 'As' : null }</p>
@@ -112,8 +112,8 @@ const Details = async ({info,type}) => {
                     <br/>
                     <div className='flex flex-wrap sm:pl-8'>
                         {
-                            collection?.parts?.map(part=>(
-                                <DetailsCard details={part} type={type}/>
+                            collection?.parts?.map((part,id)=>(
+                                <DetailsCard key={id} details={part} type={type}/>
                             ))
                         }
                     </div>
@@ -132,8 +132,8 @@ const Details = async ({info,type}) => {
                 <h2 className='border-l-4 border-amber-500 m-1 p-2 text-3xl font-semibold'>Simliar {type==="movie" ? "movie":"shows"} </h2>
                 <div className='flex flex-wrap sm:pl-8 pt-6'>
                     {
-                        recommendationCollection?.map(item=>(
-                            <DetailsCard details={item} type={type === "movie" ? "movie":"tvShow"} />
+                        recommendationCollection?.map((item,id)=>(
+                            <DetailsCard key={id} details={item} type={type === "movie" ? "movie":"tvShow"} />
                         )) 
                     }
                 </div>
