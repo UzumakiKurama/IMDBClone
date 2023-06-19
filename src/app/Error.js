@@ -3,10 +3,6 @@ import React,{useEffect} from 'react'
 
 const Error = ({error,reset}) => {
 
-    useEffect(()=>{
-      
-    },[error])
-
   return (
     <div className='text-center pt-24 '>
         <h1>Something Went Wrong</h1>
