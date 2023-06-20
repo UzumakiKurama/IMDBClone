@@ -1,6 +1,7 @@
 "use client";
 import { useState } from 'react'
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const SearchBox = () => {
     const [search, setSearch] = useState("");
@@ -12,14 +13,14 @@ const SearchBox = () => {
         router.push(`/search/${search}`);
     }
   return (
-    <form onSubmit={handleSubmit} className='flex max-w-xl justify-between items-center xl:-translate-x-24 text-lg text-black p-4 sm:p-0'>
+    <form onSubmit={handleSubmit} className='flex max-w-xl justify-between items-center xl:-translate-x-24 text-lg text-black p-2 sm:p-1 mx-2 rounded-full bg-gray-700 dark:bg-white dark:bg-opacity-60 bg-opacity-70'>
         <input 
             value={search}
             onChange={(e)=>setSearch(e.target.value)} 
             type='text' 
             placeholder='Search movies,shows ...' 
-            className='w-full rounded-full placeholder-gray-100 dark:placeholder-gray-600 outline-none bg-black dark:bg-white dark:bg-opacity-50 bg-opacity-20 p-3 flex-1' />
-        <button disabled={!search} type='submit' className='text-amber-600 dark: disabled:text-gray-200'>Search</button>
+            className=' bg-transparent outline-none border-none placeholder:text-white dark:placeholder:text-black p-1 flex-1' />
+        <button disabled={!search} type='submit' className='bg-gray-800 bg-opacity-90 disabled:bg-opacity-80 p-2 rounded-full'> <Image src="/search.svg" alt="" width="30" height="30" /> </button>
     </form>
   )
 }

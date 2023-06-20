@@ -9,9 +9,9 @@ const SearchPage = async ({params}) => {
     const tvSearchResults = await request(`/search/tv?query=${params.searchTerm}&include_adult=false&language=en-US&page=1`).then(res=>res.results);
     
   return (
-    <div className='grid grid-cols-2 gap-2 w-full h-full pt-28 '>
+    <div className='grid grid-cols-2 gap-2 w-full h-full pt-36 sm:pt-28'>
       <div className='text-center h-full'>
-        <h2 className=' text-4xl font-merriweather tracking-widest uppercase '>Movies</h2>
+        <h2 className=' text-lg sm:text-4xl font-merriweather tracking-widest uppercase '>Movies</h2>
         <div className='flex flex-wrap px-8 justify-center h-full'>
           {
             searchResults.length === 0 ? <p>No movies related to {params.searchTerm}</p> 
@@ -23,7 +23,7 @@ const SearchPage = async ({params}) => {
         </div>
       </div>
       <div className='text-center h-full'>
-        <h2 className='text-4xl font-merriweather tracking-widest uppercase ' > TV-Shows</h2>
+        <h2 className='text-lg sm:text-4xl font-merriweather tracking-widest uppercase ' > TV-Shows</h2>
         <div className='flex flex-wrap px-8 justify-center h-full'>
           {
             tvSearchResults?.length === 0 ? <p className='text-black dark:text-white'>No shows related to {params.searchTerm}</p> 

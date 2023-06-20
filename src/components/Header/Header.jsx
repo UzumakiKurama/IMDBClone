@@ -6,7 +6,7 @@ import SearchBox from '../SearchBox/SearchBox';
 
 const Header = () => {
   return (
-    <div className='w-full absolute z-10 text-white'>
+    <div className='w-full absolute z-10 text-amber-500 tracking-widest font-bold font-merriweather'>
       <div className='flex justify-between text-xl sm:mx-8 py-5 s:py-7  items-center'>
         <div className='flex dark:hidden'>
           <MenuItem title="HOME" address='/' Icon='/home.svg'/>
@@ -29,7 +29,7 @@ const Header = () => {
           <DarkModeSwitch/>
           <Link href='/'>
             <h2 className='text-lg sm:text-2xl'>
-              <span className='font-blod bg-amber-500 py-1 px-2 rounded-lg mr-1'>IMDB</span> 
+              <span className='font-blod text-white bg-amber-500 py-1 px-2 rounded-lg mr-1'>IMDB</span> 
               <span className='text-xl hidden sm:inline'>Clone</span> 
             </h2>
           </Link>
