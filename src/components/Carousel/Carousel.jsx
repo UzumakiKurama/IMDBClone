@@ -119,9 +119,9 @@ const Carousel = ({title,results,type}) => {
                 </div>  : title } 
             </h1>
             {
-              cards.length !== 0 ?  
+              cards?.length !== 0 ?  
               <div ref={carousel} className="carousel-container relative flex items-center gap-1 overflow-hidden scroll-smooth snap-x snap-mandatory touch-pan-x z-0">                
-                {cards.map(element=>(
+                {cards?.map(element=>(
                     <CarouselCard key={element.id} result={element} type={type} />
                 ))}
               </div> : null

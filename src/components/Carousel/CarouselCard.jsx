@@ -23,7 +23,6 @@ const CarouselCard = ({result, type}) => {
                             <img width={30} height={30} className='inline' src='./r-arrow.png'/>
                         </Link> 
                     </div>
-            
             </div>
         </div>
 
