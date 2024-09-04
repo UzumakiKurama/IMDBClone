@@ -4,17 +4,22 @@ const options = {
     headers: {
       accept: 'application/json',
       Authorization: `Bearer ${API_KEY}`
-    }
+    },
+    next: { revalidate: 60 } 
   };
 
 const request = async (url) => {
 
-  const result = await fetch(`https://api.themoviedb.org/3${url}`,options,{next : {revalidate: 1000}})
-                .then(response => response.json())
-                .catch(err => console.error(err));
-  
-    return result;
-}
+  try{
+    const result = await fetch(`https://api.themoviedb.org/3${url}`,options)
+                  .then(response => response.json())
+                  .catch(err => console.error(err));
 
+    return result;
+  }catch(error){
+    console.log(error);
+  }
+
+}
 
 export default request
