@@ -1,6 +1,7 @@
 'use client';
 import React, { useCallback, useEffect, useRef, useState, useLayoutEffect } from 'react'
 import TypewriterComponent from 'typewriter-effect';
+
 const HomeContainer = ({movieDetails}) => {
   
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -69,7 +70,7 @@ const HomeContainer = ({movieDetails}) => {
           </p>
         </div>
 
-        <div onClick={prevSlideHandler} className='absolute top-1/2 left-0 translate-x-0 -translate-y-1/2 text-7xl z-10 cursor-pointer text-white hover:text-amber-500'>〈 </div>
+        <div onClick={prevSlideHandler} className='absolute top-1/2 left-0 translate-x-0 -translate-y-1/2 text-4xl sm:text-7xl z-10 cursor-pointer text-white hover:text-white'>〈 </div>
         <div style={{width:`${width*movieDetails.length}px`, transform:`translateX(-${currentIndex*width}px)`, transition: 'transform ease-out 0.5s'}} className='h-full flex overflow-hidden'>
           {
             width > 480 ? 
@@ -85,8 +86,8 @@ const HomeContainer = ({movieDetails}) => {
             ))
           }
         </div>
-        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10  text-center'>
-            <div className='font-bold text-center text-amber-500 font-kronaone tracking-wider  sm:text-9xl text-4xl pb-10'>
+        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-[400px] mt-8 sm:min-w-[1100px] text-center'>
+            <div className='font-bold text-center text-4xl sm:text-9xl text-white font-kronaone tracking-wider pb-10'>
               <TypewriterComponent onInit={(typewriter)=>{
                                           typewriter.typeString("Movies")
                                                     .pauseFor(2000)
@@ -100,7 +101,7 @@ const HomeContainer = ({movieDetails}) => {
             </div>
             <p className='font-merriweather text-lg sm:text-2xl text-white'>Know all about your favourite Movies and TV Shows.</p>
         </div>
-        <div onClick={nextSlideHandler} className='absolute top-1/2 right-0 translate-x-0 -translate-y-1/2 text-7xl z-10 cursor-pointer text-white hover:text-amber-500' > 〉 </div>
+        <div onClick={nextSlideHandler} className='absolute top-1/2 right-0 translate-x-0 -translate-y-1/2 text-4xl sm:text-7xl z-10 cursor-pointer text-white hover:text-white' > 〉 </div>
     </div>
   )
 }

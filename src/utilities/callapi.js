@@ -1,11 +1,13 @@
-const API_KEY = process.env.API_KEY
+const API_KEY = process.env.API_KEY;
+const SMALL_API_KEY = process.env.SMALL_API_KEY;
+
 const options = {
     method: 'GET',
     headers: {
       accept: 'application/json',
       Authorization: `Bearer ${API_KEY}`
     },
-    next: { revalidate: 60 } 
+    next: { revalidate: 60 * 10} 
   };
 
 const request = async (url) => {

@@ -13,7 +13,8 @@ module.exports = {
       },
       fontFamily:{
         'merriweather':['Merriweather', 'sans-serif'],
-        'kronaone':['Krona One', 'sans-serif']
+        'kronaone':['Krona One', 'sans-serif'],
+        'montserrat' : ['Montserrat', 'sans-serif']
       },
       aspectRatio: {
         '4/3': '4 / 3',
