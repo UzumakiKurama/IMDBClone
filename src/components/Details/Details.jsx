@@ -41,16 +41,18 @@ const Details = async ({info,type}) => {
     }
     
     return (
-    <div className='flex flex-col sm:mx-20 items-center content-center md:space-x-6'>
+    <div className='flex flex-col items-center content-center md:space-x-6'>
         
         <div 
             style={{ 
-                    backgroundImage:`linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,0.9)), url(https://image.tmdb.org/t/p/original/${info?.backdrop_path})`, 
+                    backgroundImage:`linear-gradient(to bottom, rgba(0,0,0,10%), rgba(0,0,0,90%)), url(https://image.tmdb.org/t/p/original/${info?.backdrop_path})`, 
                     height:'80vh'
             }} 
             className=' w-full bg-cover bg-no-repeat bg-center relative'>
             <div className='text-center absolute bottom-0 left-1/2 -translate-x-1/2'>
-                <h1 style={{fontFamily:'Krona One'}} className='text-white uppercase font-semibold 2xl:text-8xl lg:text-7xl md:text-6xl sm:text-5xl text-4xl pb-10 px-3 tracking-wider font-kronaone leading-snug'>{ type==="movie" ? info.title : info.name}</h1>
+                <h1 style={{fontFamily:'Krona One'}} className='text-white uppercase font-semibold 2xl:text-8xl lg:text-7xl md:text-6xl sm:text-5xl text-4xl pb-10 px-3 tracking-wider font-kronaone leading-snug'>
+                    { type==="movie" ? info.title : info.name}
+                </h1>
                 <p className=' text-white pb-10 italic font-merriweather'>{info.tagline}</p>
             </div>
         </div>

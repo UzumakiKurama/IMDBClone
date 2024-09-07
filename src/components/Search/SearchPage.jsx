@@ -3,7 +3,7 @@
 import React, { useState, useEffect} from 'react';
 import { FiSearch } from 'react-icons/fi';
 import SearchMovieCard from './SearchMovieCard/SearchMovieCard';
-import request from '@/utilities/callapi';
+import Loader from '../Loader/Loader';
 
 const SearchPage = () => {
     const [value, setValue] = useState("");
@@ -15,9 +15,17 @@ const SearchPage = () => {
             let timeoutId = null;
             try {
                 timeoutId = setTimeout(() => {
-                    request(`/search/movie?query=${value}&include_adult=false&language=en-US&page=1`)
-                        .then((response) => setResults(response))
-                        .catch(err => setError(err));
+                    fetch(`https://api.themoviedb.org/3/search/movie?query=${value}&include_adult=false&language=en-US&page=1`,{
+                        method: 'GET',
+                        headers: {
+                            accept: 'application/json',
+                            Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`
+                        },
+                        next: { revalidate: 60 * 10} 
+                    })
+                    .then(response => response.json())
+                    .then((response) => setResults(response.results))
+                    .catch(err => setError(err));
                 }, 1200);
             } catch (error) {   
                 setError(error);
@@ -26,6 +34,8 @@ const SearchPage = () => {
             return () => {
                 clearTimeout(timeoutId);
             }
+        } else {
+            setResults([]);
         }
 
     }, [value]);
@@ -51,7 +61,12 @@ const SearchPage = () => {
                             results.map(movie => <SearchMovieCard key={movie.id} movie={movie} />)
                         }
                     </div> 
-                : <div className='text-2xl font-merriweather '>Search any movie or tv-series...</div> 
+                : <div className='text-2xl font-merriweather '>
+                    Search any movie or tv-series...
+                    {
+                        value !== "" && <div className='flex justify-center mt-4'> <Loader /> </div>
+                    }    
+                </div> 
             }
             {
                 results.length === 0 && error.length > 1 ? <div> {error} </div> : null
