@@ -45,7 +45,8 @@ const Details = async ({info,type}) => {
         
         <div 
             style={{ 
-                    backgroundImage:`linear-gradient(to bottom, rgba(0,0,0,10%), rgba(0,0,0,90%)), url(https://image.tmdb.org/t/p/original/${info?.backdrop_path})`, 
+                    backgroundImage:`linear-gradient(to bottom, rgba(0,0,0,10%), rgba(0,0,0,90%)), url(https://image.tmdb.org/t/p/original/${info?.backdrop_path})`,
+                    backgroundPosition : '-5% 0%', 
                     height:'80vh'
             }} 
             className=' w-full bg-cover bg-no-repeat bg-center relative'>
@@ -63,7 +64,7 @@ const Details = async ({info,type}) => {
             </div>
 
             <div className='text-black dark:text-white font-merriweather'>
-                <h2 className='mb-3 font-bold font-merriweather tracking-widest text-2xl '> {info.original_title || info.name}</h2>
+                <h2 className='mb-3 font-bold tracking-widest text-3xl font-kronaone '> {info.original_title || info.name}</h2>
                 <div className='text-xl mb-3 leading-[4rem] pb-10  justify-between'>
 
                     <p className='flex items-center'> 
@@ -114,7 +115,7 @@ const Details = async ({info,type}) => {
             {
                 Object.keys(collection).length !== 0 ? 
                 <div className='w-full py-20'>
-                    <h2 className='border-l-4 border-amber-500 p-2 text-3xl font-semibold'> Prequels / Sequels </h2>
+                    <h2 className='border-l-4 border-amber-500 p-2 text-3xl font-montserrat font-semibold'> Prequels / Sequels </h2>
                     <br/>
                     <div className='flex flex-wrap sm:pl-8'>
                         {
@@ -135,7 +136,7 @@ const Details = async ({info,type}) => {
             } */}
 
             <div className='w-full py-5'>
-                <h2 className='border-l-4 border-amber-500 m-1 p-2 text-3xl font-semibold'>Simliar {type==="movie" ? "movie":"shows"} </h2>
+                <h2 className='border-l-4 border-amber-500 m-1 p-2 text-3xl font-semibold font-montserrat'>Simliar {type==="movie" ? "movie":"shows"} </h2>
                 <div className='flex flex-wrap sm:pl-8 pt-6'>
                     {
                         recommendationCollection?.map((item,id)=>(
