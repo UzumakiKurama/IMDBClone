@@ -50,10 +50,9 @@ const Details = async ({info,type}) => {
         <div 
             style={{ 
                     backgroundImage:`linear-gradient(to bottom, rgba(0,0,0,10%), rgba(0,0,0,90%)), url(https://image.tmdb.org/t/p/original/${info?.backdrop_path})`,
-                    backgroundPosition : '-5% 0%', 
                     height:'80vh'
             }} 
-            className=' w-full bg-cover bg-no-repeat bg-center relative'>
+            className=' w-full bg-cover bg-no-repeat bg-center relative sm:bg-[-5%_0%]'>
             <div className='text-center absolute bottom-0 left-1/2 -translate-x-1/2'>
                 <h1 style={{fontFamily:'Krona One'}} className='text-white uppercase font-semibold 2xl:text-8xl lg:text-7xl md:text-6xl sm:text-5xl text-4xl pb-10 px-3 tracking-wider font-kronaone leading-snug'>
                     { type==="movie" ? info.title : info.name}
@@ -71,19 +70,20 @@ const Details = async ({info,type}) => {
                 <h2 className='mb-3 font-bold tracking-widest text-3xl font-kronaone '> {info.original_title || info.name}</h2>
                 <div className='text-xl mb-3 leading-[4rem] pb-10  justify-between'>
 
-                    <p className='flex items-center'> 
+                    <div className='flex items-center'> 
                         Rating : 
                         <img className=' w-16 h-12 px-2' src='/star.png'/>
                         <span className='font-semibold '>{info?.vote_average?.toFixed(2)} </span> 
                         <span className='text-gray-400'> / 10</span> 
-                    </p>
-                    <p className='flex flex-wrap items-center sm:block '> Genre : 
+                    </div>
+                    <div className='sm:block '> Genre : 
                         {info?.genres?.map((genre,id) => (
-                        <span key={id} className='pr-2 bg-amber-500 hover:bg-amber-400 rounded-3xl p-2 m-2 text-black'>{genre.name}</span>
-                        ))} </p>
-                    <p>
+                        <span key={id} className='pr-2 bg-amber-500 hover:bg-amber-400 rounded-3xl  p-2 m-2 text-black'>{genre.name}</span>
+                        ))} 
+                    </div>
+                    <div>
                         Released : <span>{info?.release_date || info?.first_air_date}</span> 
-                    </p>
+                    </div>
 
                     <p> 
                         Directed By : {director}
@@ -101,10 +101,10 @@ const Details = async ({info,type}) => {
                 <div className=''>
                     <span className='text-lg leading-relaxed text-justify border-l-4 border-amber-500 pl-2'>Top Cast :</span>
                     
-                    <div className='flex flex-wrap'>
+                    <div className='flex flex-wrap gap-16'>
                         {
                             actors?.map((actor,id) =>(
-                                <div className='grow-1 p-2 sm:p-5' key={id}>
+                                <div className='grow-1' key={id}>
                                         <img className='mx-auto rounded-[50%]' alt="" src={`https://image.tmdb.org/t/p/w154/${actor?.profile_path}`} />
                                         <p className='text-center'> {actor?.name} </p>
                                         <p className='text-center italic'>{actor != undefined ? 'As' : null }</p>
@@ -141,7 +141,7 @@ const Details = async ({info,type}) => {
             <div className='w-full py-5'>
                 <h2 className="border-l-4 border-amber-500 m-1 p-2 text-3xl font-semibold font-montserrat">Trailer</h2>
                 {
-                    videoUrl.length > 0 ? <div className='flex justify-center items-center gap-8'>
+                    videoUrl.length > 0 ? <div className='flex flex-col sm:flex-row justify-center items-center gap-8'>
                             <VideoPlayer videoUrl={videoUrl[0].key}/> 
                             <VideoPlayer videoUrl={videoUrl[1].key}/> 
                         </div>

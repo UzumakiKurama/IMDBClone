@@ -70,18 +70,34 @@ const HomeContainer = ({movieDetails}) => {
           </p>
         </div>
 
-        <div onClick={prevSlideHandler} className='absolute top-1/2 left-0 translate-x-0 -translate-y-1/2 text-4xl sm:text-7xl z-10 cursor-pointer text-white hover:text-white'>〈 </div>
-        <div style={{width:`${width*movieDetails.length}px`, transform:`translateX(-${currentIndex*width}px)`, transition: 'transform ease-out 0.5s'}} className='h-full flex overflow-hidden'>
+        <div 
+          onClick={prevSlideHandler} 
+          className='absolute top-1/2 left-0 translate-x-0 -translate-y-1/2 text-4xl sm:text-7xl z-10 cursor-pointer text-white hover:text-white'>〈 </div>
+        <div 
+          style={{ 
+              width:`${width*movieDetails.length}px`, 
+              transform:`translateX(-${currentIndex*width}px)`, 
+              transition: 'transform ease-out 0.5s'
+            }} 
+          className='h-full flex overflow-hidden'>
           {
             width > 480 ? 
             movieDetails.map((movie,id) => (
-              <div key={id} style={{backgroundImage : `linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,0.7)),url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`}} 
-                   className='h-full w-full bg-center bg-cover bg-no-repeat object-fill transition-all '> 
+              <div 
+                key={id} 
+                style={{
+                    backgroundImage : `linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,0.7)),url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`
+                  }} 
+                className='h-full w-full bg-center bg-cover bg-no-repeat object-fill transition-all '> 
               </div>
             )) : 
             movieDetails.map((movie,id) => (
-              <div key={id} style={{backgroundImage : `linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,0.7)),url(https://image.tmdb.org/t/p/original/${movie.poster_path})`}} 
-                   className='h-full w-full bg-center bg-cover bg-no-repeat object-fill transition-all '> 
+              <div 
+                key={id} 
+                style={{
+                  backgroundImage : `linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,0.7)),url(https://image.tmdb.org/t/p/original/${movie.poster_path})`
+                }} 
+                className='h-full w-full bg-center bg-cover bg-no-repeat object-fill transition-all '> 
               </div>
             ))
           }
