@@ -5,7 +5,7 @@ const TvShowPage = async ({params}) => {
 
   const tvShow = await request(`/tv/${params.id}?language=en-US`);
   return (
-    <div className='w-full pt-[88px]'>
+    <div className='w-full '>
         <Details info={tvShow} type="tvShow"/>
     </div>
   )

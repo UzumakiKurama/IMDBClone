@@ -2,16 +2,20 @@ import request from '@/utilities/callapi'
 import React from 'react'
 import DetailsCard from './DetailsCard';
 import Image from 'next/image';
+import VideoPlayer from '../VideoPlayer/VideoPlayer';
 
 const Details = async ({info,type}) => {
 
     let creditResults = {};
     let recommendations = [];
+    let videoUrl = [];
 
     if(type === "movie"){
+        videoUrl = await request(`/movie/${info?.id}/videos?language=en-US`).then(res => res.results);
         creditResults = await request(`/movie/${info?.id}/credits?language=en-US`);
         recommendations = await request(`/movie/${info?.id}/recommendations?language=en-US&page=1`).then(res=>res?.results);
     } else {
+        videoUrl = await request(`/tv/${info?.id}/videos?language=en-US`).then(res => res.results);
         creditResults = await request(`/tv/${info?.id}/credits?language=en-US`);
         recommendations = await request(`/tv/${info?.id}/recommendations?language=en-US&page=1`).then(res=>res?.results);
     }
@@ -134,9 +138,19 @@ const Details = async ({info,type}) => {
                     {info.seasons.map(season => <Image src={`https://image.tmdb.org/t/p/w300/${season?.poster_path}`} alt='loading' width={200} height={300} />)}
                 </div>
             } */}
+            <div className='w-full py-5'>
+                <h2 className="border-l-4 border-amber-500 m-1 p-2 text-3xl font-semibold font-montserrat">Trailer</h2>
+                {
+                    videoUrl.length > 0 ? <div className='flex justify-center items-center gap-8'>
+                            <VideoPlayer videoUrl={videoUrl[0].key}/> 
+                            <VideoPlayer videoUrl={videoUrl[1].key}/> 
+                        </div>
+                        : <div className='text-3xl font-merriweather'>Trailer not available</div>
+                }
+            </div>
 
             <div className='w-full py-5'>
-                <h2 className='border-l-4 border-amber-500 m-1 p-2 text-3xl font-semibold font-montserrat'>Simliar {type==="movie" ? "movie":"shows"} </h2>
+                <h2 className='border-l-4 border-amber-500 m-1 p-2 text-3xl font-semibold font-montserrat'>Simliar {type==="movie" ? "movies":"shows"} </h2>
                 <div className='flex flex-wrap sm:pl-8 pt-6'>
                     {
                         recommendationCollection?.map((item,id)=>(
@@ -145,6 +159,7 @@ const Details = async ({info,type}) => {
                     }
                 </div>
             </div>
+
     </div>
   )
 }
